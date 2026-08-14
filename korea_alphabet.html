@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>韓文字母 Flash Card - 階段三：方塊組合與拼讀練習 (40頁精華)</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --text-main: #1f2937;
+            --text-sub: #4b5563;
+            --accent: #f59e0b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            box-sizing: border-box;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .slide-header {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .slide-title {
+            font-size: 1.5rem;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+        }
+        .flash-card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .big-korean {
+            font-size: 5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .breakdown {
+            font-size: 1.5rem;
+            color: var(--text-sub);
+            background: #f3f4f6;
+            padding: 8px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .vocab-example {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        button:disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+        }
+        .page-indicator {
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div>
+            <div class="slide-header" id="slide-category">階段三：方塊組合與拼讀練習</div>
+            <div class="slide-title" id="slide-subtitle">基本架構與規則</div>
+        </div>
+
+        <div class="flash-card-body">
+            <div class="big-korean" id="card-main">가</div>
+            <div class="breakdown" id="card-breakdown">ㄱ (g) + ㅏ (a) = 가 (ga)</div>
+            <div class="vocab-example" id="card-vocab">單字範例：가방 (kabang - 書包)</div>
+        </div>
+
+        <div class="controls">
+            <button id="prev-btn" onclick="prevSlide()">上一頁</button>
+            <span class="page-indicator" id="page-indicator">1 / 40</span>
+            <button id="next-btn" onclick="nextSlide()">下一頁</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            // 基礎概念 (1-5)
+            {cat: "階段三：方塊組合概念", sub: "什麼是韓文方塊字？", main: "한", breakdown: "子音 'ㅎ' + 母音 'ㅏ' + 收音 'ㄴ'", vocab: "特色：韓文是將子母音拼組在同一個方塊內"},
+            {cat: "階段三：方塊組合規則", sub: "直立型母音組合 (右側配子音)", main: "가", breakdown: "ㄱ (左) + ㅏ (右)", vocab: "適用母音：ㅏ, ㅑ, ㅓ, ㅕ, ㅣ"},
+            {cat: "階段三：方塊組合規則", sub: "水平型母音組合 (下方配子音)", main: "고", breakdown: "ㄱ (上) + ㅗ (下)", vocab: "適用母音：ㅗ, ㅛ, ㅜ, ㅠ, ㅡ"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄱ 拼母音系列 (1/5)", main: "가", breakdown: "ㄱ + ㅏ ＝ 가 (ga)", vocab: "單字：가격 (價格)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄱ 拼母音系列 (2/5)", main: "고", breakdown: "ㄱ + ㅗ ＝ 고 (go)", vocab: "單字：고기 (肉類)"},
+            
+            // 子音 ㄱ 拼圖系列 (6-8)
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄱ 拼母音系列 (3/5)", main: "구", breakdown: "ㄱ + ㅜ ＝ 구 (gu)", vocab: "單字：구름 (雲朵)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄱ 拼母音系列 (4/5)", main: "기", breakdown: "ㄱ + ㅣ ＝ 기 (gi)", vocab: "單字：기차 (火車)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄱ 拼母音系列 (5/5)", main: "개", breakdown: "ㄱ + ㅐ ＝ 개 (gae)", vocab: "單字：개미 (螞蟻)"},
+
+            // 子音 ㄴ 拼圖系列 (9-12)
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄴ 拼讀練習 (1/4)", main: "나", breakdown: "ㄴ + ㅏ ＝ 나 (na)", vocab: "單字：나무 (樹木)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄴ 拼讀練習 (2/4)", main: "너", breakdown: "ㄴ + ㅓ ＝ 너 (neo)", vocab: "單字：너구리 (浣熊)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄴ 拼讀練習 (3/4)", main: "누", breakdown: "ㄴ + ㅜ ＝ 누 (nu)", vocab: "單字：누나 (姐姐 - 男生稱)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄴ 拼讀練習 (4/4)", main: "니", breakdown: "ㄴ + ㅣ ＝ 니 (ni)", vocab: "單字：니트 (針織衫)"},
+
+            // 子音 ㄷ 拼圖系列 (13-16)
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄷ 拼讀練習 (1/4)", main: "다", breakdown: "ㄷ + ㅏ ＝ 다 (da)", vocab: "單字：다리 (橋/腿)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄷ 拼讀練習 (2/4)", main: "도", breakdown: "ㄷ + ㅗ ＝ 도 (do)", vocab: "單字：도시 (都市)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄷ 拼讀練習 (3/4)", main: "두", breakdown: "ㄷ + ㅜ ＝ 두 (du)", vocab: "單字：두부 (豆腐)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄷ 拼讀練習 (4/4)", main: "디", breakdown: "ㄷ + ㅣ ＝ 디 (di)", vocab: "單字：디스크 (磁碟)"},
+
+            // 子音 ㄹ 拼圖系列 (17-20)
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄹ 拼讀練習 (1/4)", main: "라", breakdown: "ㄹ + ㅏ ＝ 라 (ra)", vocab: "單字：라디오 (收音機)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄹ 拼讀練習 (2/4)", main: "로", breakdown: "ㄹ + ㅗ ＝ 로 (ro)", vocab: "單字：로봇 (機器人)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄹ 拼讀練習 (3/4)", main: "루", breakdown: "ㄹ + ㅜ ＝ 루 (ru)", vocab: "單字：루비 (紅寶石)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㄹ 拼讀練習 (4/4)", main: "리", breakdown: "ㄹ + ㅣ ＝ 리 (ri)", vocab: "單字：리본 (緞帶)"},
+
+            // 子音 ㅁ 拼圖系列 (21-24)
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅁ 拼讀練習 (1/4)", main: "마", breakdown: "ㅁ + ㅏ ＝ 마 (ma)", vocab: "單字：마늘 (大蒜)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅁ 拼讀練習 (2/4)", main: "모", breakdown: "ㅁ + ㅗ ＝ 모 (mo)", vocab: "單字：모자 (帽子)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅁ 拼讀練習 (3/4)", main: "무", breakdown: "ㅁ + ㅜ ＝ 무 (mu)", vocab: "單字：무(白蘿蔔)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅁ 拼讀練習 (4/4)", main: "미", breakdown: "ㅁ + ㅣ ＝ 미 (mi)", vocab: "單字：미술 (美術)"},
+
+            // 子音 ㅂ 拼圖系列 (25-28)
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅂ 拼讀練習 (1/4)", main: "바", breakdown: "ㅂ + ㅏ ＝ 바 (ba)", vocab: "單字：바다 (大海)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅂ 拼讀練習 (2/4)", main: "보", breakdown: "ㅂ + ㅗ ＝ 보 (bo)", vocab: "單字：보석 (寶石)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅂ 拼讀練習 (3/4)", main: "부", breakdown: "ㅂ + ㅜ ＝ 부 (bu)", vocab: "單字：부엌 (廚房)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅂ 拼讀練習 (4/4)", main: "비", breakdown: "ㅂ + ㅣ ＝ 비 (bi)", vocab: "單字：비 (雨)"},
+
+            // 子音 ㅅ 拼圖系列 (29-32)
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅅ 拼讀練習 (1/4)", main: "사", breakdown: "ㅅ + ㅏ ＝ 사 (sa)", vocab: "單字：사과 (蘋果)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅅ 拼讀練習 (2/4)", main: "소", breakdown: "ㅅ + ㅗ ＝ 소 (so)", vocab: "單字：소금 (鹽巴)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅅ 拼讀練習 (3/4)", main: "수", breakdown: "ㅅ + ㅜ ＝ 수 (su)", vocab: "單字：수박 (西瓜)"},
+            {cat: "階段三：拼讀練習", sub: "基礎子音 ㅅ 拼讀練習 (4/4)", main: "시", breakdown: "ㅅ + ㅣ ＝ 시 (si)", vocab: "單字：시계 (時鐘)"},
+
+            // 空白子音 ㅇ 拼圖系列 (33-36)
+            {cat: "階段三：拼讀練習", sub: "空白子音 ㅇ 作為首音 (1/4)", main: "아", breakdown: "ㅇ (無聲效) + ㅏ ＝ 아 (a)", vocab: "單字：아이 (小孩)"},
+            {cat: "階段三：拼讀練習", sub: "空白子音 ㅇ 作為首音 (2/4)", main: "오", breakdown: "ㅇ + ㅗ ＝ 오 (o)", vocab: "單字：오이 (小黃瓜)"},
+            {cat: "階段三：拼讀練習", sub: "空白子音 ㅇ 作為首音 (3/4)", main: "우", breakdown: "ㅇ + ㅜ ＝ 우 (u)", vocab: "單字：우유 (牛奶)"},
+            {cat: "階段三：拼讀練習", sub: "空白子音 ㅇ 作為首音 (4/4)", main: "이", breakdown: "ㅇ + ㅣ ＝ 이 (i)", vocab: "單字：이빨 (牙齒)"},
+
+            // 綜合複習與進階 (37-40)
+            {cat: "階段三：綜合測驗", sub: "綜合組合：子音 ㅈ", main: "자", breakdown: "ㅈ + ㅏ ＝ 자 (ja)", vocab: "單字：자전거 (腳踏車)"},
+            {cat: "階段三：綜合測驗", sub: "綜合組合：子音 ㅊ", main: "차", breakdown: "ㅊ + ㅏ ＝ 차 (cha)", vocab: "單字：차 (車子/茶)"},
+            {cat: "階段三：綜合測驗", sub: "綜合組合：子音 ㅋ", main: "카", breakdown: "ㅋ + ㅏ ＝ 카 (ka)", vocab: "單字：카메라 (相機)"},
+            {cat: "階段三：總結", sub: "階段三圓滿達成", main: "완료!", breakdown: "恭喜完成 40 頁方塊拼讀練習！", vocab: "下一步：挑戰終端收音（Batchim）與連音規則"}
+        ];
+
+        let currentIndex = 0;
+
+        function updateSlide() {
+            const current = slides[currentIndex];
+            document.getElementById('slide-category').innerText = current.cat;
+            document.getElementById('slide-subtitle').innerText = current.sub;
+            document.getElementById('card-main').innerText = current.main;
+            document.getElementById('card-breakdown').innerText = current.breakdown;
+            document.getElementById('card-vocab').innerText = current.vocab;
+            document.getElementById('page-indicator').innerText = `${currentIndex + 1} / ${slides.length}`;
+
+            document.getElementById('prev-btn').disabled = currentIndex === 0;
+            document.getElementById('next-btn').disabled = currentIndex === slides.length - 1;
+        }
+
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlide();
+            }
+        }
+
+        // 初始化
+        updateSlide();
+    </script>
+</body>
+</html>
