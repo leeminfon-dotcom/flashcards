@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>語言復健圖卡練習 (10題範例)</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 450px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .image-box {
+            font-size: 100px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: #f8fafc;
+            width: 100%;
+            border-radius: 15px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .prompt-text {
+            font-size: 1.3rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .answer-box {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 30px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        button {
+            font-size: 1.3rem;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .btn-show {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-show:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-speak {
+            background-color: #10b981;
+            color: white;
+            display: none;
+        }
+
+        .btn-speak:hover {
+            background-color: #059669;
+        }
+
+        .btn-next {
+            background-color: #64748b;
+            color: white;
+        }
+
+        .btn-next:hover {
+            background-color: #475569;
+        }
+
+        .progress {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🧠 語言看圖說話練習</h1>
+
+    <div class="card-container">
+        <div class="image-box" id="imageBox">🪥</div>
+        <div class="prompt-text">請問這是什麼？試著說說看：</div>
+        <div class="answer-box" id="answerBox">?</div>
+
+        <div class="btn-group">
+            <button class="btn-show" id="showBtn" onclick="revealAnswer()">看答案 / 聽聲音</button>
+            <button class="btn-speak" id="speakBtn" onclick="speakWord()">再聽一次</button>
+            <button class="btn-next" onclick="nextCard()">下一張</button>
+        </div>
+    </div>
+
+    <div class="progress" id="progressText">第 1 張 / 共 10 張</div>
+
+    <script>
+        // 10 個生活常用圖卡題庫
+        const cards = [
+            { emoji: "🪥", word: "牙刷" },
+            { emoji: "🍎", word: "蘋果" },
+            { emoji: "🔑", word: "鑰匙" },
+            { emoji: "👕", word: "衣服" },
+            { emoji: "🍵", word: "茶杯" },
+            { emoji: "📱", word: "手機" },
+            { emoji: "👓", word: "眼鏡" },
+            { emoji: "👟", word: "鞋子" },
+            { emoji: "☂️", word: "雨傘" },
+            { emoji: "⏱️", word: "時鐘" }
+        ];
+
+        let currentIndex = 0;
+        let isRevealed = false;
+
+        const imageBox = document.getElementById("imageBox");
+        const answerBox = document.getElementById("answerBox");
+        const showBtn = document.getElementById("showBtn");
+        const speakBtn = document.getElementById("speakBtn");
+        const progressText = document.getElementById("progressText");
+
+        function updateCard() {
+            isRevealed = false;
+            const current = cards[currentIndex];
+            imageBox.textContent = current.emoji;
+            answerBox.textContent = "？";
+            showBtn.style.display = "block";
+            speakBtn.style.display = "none";
+            progressText.textContent = `第 ${currentIndex + 1} 張 / 共 ${cards.length} 張`;
+        }
+
+        function revealAnswer() {
+            const current = cards[currentIndex];
+            answerBox.textContent = current.word;
+            isRevealed = true;
+            
+            showBtn.style.display = "none";
+            speakBtn.style.display = "block";
+            
+            speakWord();
+        }
+
+        function speakWord() {
+            const current = cards[currentIndex];
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(current.word);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.8; // 放慢語速
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateCard();
+        }
+
+        updateCard();
+    </script>
+
+</body>
+</html>
