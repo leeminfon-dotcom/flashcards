@@ -48,7 +48,7 @@
   { "id": "t17", "word": "曳引車", "content": "images/tractor.jpg", "category": "交通工具" },
   { "id": "t18", "word": "堆高機", "content": "images/forklift.jpg", "category": "交通工具" },
   { "id": "t19", "word": "纜車", "content": "images/cablecar.jpg", "category": "交通工具" },
-  { "id": "t20", "word": "遊艇", "content": "images/yacht.jpg", "category": "交通工具" }
+  { "id": "t20", "word": "遊艇", "content": "images/yacht.jpg", "category": "交通工具" },
   { "id": "h1", "word": "冰箱", "content": "images/refrigerator.jpg", "category": "家電" },
   { "id": "h2", "word": "洗衣機", "content": "images/washing_machine.jpg", "category": "家電" },
   { "id": "h3", "word": "微波爐", "content": "images/microwave.jpg", "category": "家電" },
