@@ -1,0 +1,12 @@
+[
+  { "id": "1", "word": "牙刷", "content": "🪥", "category": "日用品" },
+  { "id": "2", "word": "蘋果", "content": "🍎", "category": "食物" },
+  { "id": "3", "word": "鑰匙", "content": "🔑", "category": "日用品" },
+  { "id": "4", "word": "衣服", "content": "👕", "category": "衣物" },
+  { "id": "5", "word": "茶杯", "content": "🍵", "category": "日用品" },
+  { "id": "6", "word": "手機", "content": "📱", "category": "日用品" },
+  { "id": "7", "word": "眼鏡", "content": "👓", "category": "日用品" },
+  { "id": "8", "word": "鞋子", "content": "👟", "category": "衣物" },
+  { "id": "9", "word": "雨傘", "content": "☂️", "category": "日用品" },
+  { "id": "10", "word": "時鐘", "content": "⏱️", "category": "日用品" }
+]
