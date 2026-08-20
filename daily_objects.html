@@ -29,11 +29,11 @@
             width: 100%; border-radius: 15px; border: 2px dashed #cbd5e1;
             overflow: hidden; /* 確保圖片不會溢出框框 */
         }
-        /* 讓圖片自動縮放並佔滿容器 */
+        /* 更改為 contain，讓圖片完整呈現、不被裁切 */
         .image-box img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 如果想要完整顯示整張圖不被裁切，可改為 contain */
+            object-fit: contain; 
         }
         .prompt-text { font-size: 1.3rem; color: #64748b; margin-bottom: 20px; }
         .answer-box {
@@ -80,7 +80,6 @@
         const speakBtn = document.getElementById("speakBtn");
         const progressText = document.getElementById("progressText");
 
-        // 讀取正確的 cards.json
         async function loadCards() {
             try {
                 const response = await fetch('cards.json');
@@ -96,8 +95,6 @@
 
         function updateCard() {
             const current = cards[currentIndex];
-            
-            // 載入圖片
             imageBox.innerHTML = `<img src="${current.content}" alt="${current.word}">`;
             
             answerBox.textContent = "？";
@@ -130,7 +127,6 @@
             updateCard();
         }
 
-        // 程式啟動時載入資料
         loadCards();
     </script>
 
