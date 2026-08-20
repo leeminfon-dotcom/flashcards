@@ -89,7 +89,10 @@
 
         function updateCard() {
             const current = cards[currentIndex];
-            imageBox.textContent = current.content;
+    
+            // 確保這裡是用正確的 HTML <img> 標籤包覆，而不是直接印出文字
+            imageBox.innerHTML = `<img src="${current.content}" alt="${current.word}">`;
+            
             answerBox.textContent = "？";
             showBtn.style.display = "block";
             speakBtn.style.display = "none";
