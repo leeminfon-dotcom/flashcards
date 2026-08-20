@@ -28,9 +28,7 @@
   { "id": "d27", "word": "枕頭", "content": "images/pillow.jpg", "category": "日用品" },
   { "id": "d28", "word": "棉被", "content": "images/blanket.jpg", "category": "日用品" },
   { "id": "d29", "word": "拖鞋", "content": "images/slippers.jpg", "category": "日用品" },
-  { "id": "d30", "word": "馬桶刷", "content": "images/toiletbrush.jpg", "category": "日用品" }
-]
-[
+  { "id": "d30", "word": "馬桶刷", "content": "images/toiletbrush.jpg", "category": "日用品" },
   { "id": "t1", "word": "汽車", "content": "images/car.jpg", "category": "交通工具" },
   { "id": "t2", "word": "公車", "content": "images/bus.jpg", "category": "交通工具" },
   { "id": "t3", "word": "計程車", "content": "images/taxi.jpg", "category": "交通工具" },
