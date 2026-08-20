@@ -30,3 +30,25 @@
   { "id": "d29", "word": "拖鞋", "content": "images/slippers.jpg", "category": "日用品" },
   { "id": "d30", "word": "馬桶刷", "content": "images/toiletbrush.jpg", "category": "日用品" }
 ]
+[
+  { "id": "t1", "word": "汽車", "content": "images/car.jpg", "category": "交通工具" },
+  { "id": "t2", "word": "公車", "content": "images/bus.jpg", "category": "交通工具" },
+  { "id": "t3", "word": "計程車", "content": "images/taxi.jpg", "category": "交通工具" },
+  { "id": "t4", "word": "機車", "content": "images/motorcycle.jpg", "category": "交通工具" },
+  { "id": "t5", "word": "自行車", "content": "images/bicycle.jpg", "category": "交通工具" },
+  { "id": "t6", "word": "火車", "content": "images/train.jpg", "category": "交通工具" },
+  { "id": "t7", "word": "高鐵", "content": "images/highspeedtrain.jpg", "category": "交通工具" },
+  { "id": "t8", "word": "捷運", "content": "images/subway.jpg", "category": "交通工具" },
+  { "id": "t9", "word": "飛機", "content": "images/airplane.jpg", "category": "交通工具" },
+  { "id": "t10", "word": "直升機", "content": "images/helicopter.jpg", "category": "交通工具" },
+  { "id": "t11", "word": "船", "content": "images/boat.jpg", "category": "交通工具" },
+  { "id": "t12", "word": "渡輪", "content": "images/ferry.jpg", "category": "交通工具" },
+  { "id": "t13", "word": "救護車", "content": "images/ambulance.jpg", "category": "交通工具" },
+  { "id": "t14", "word": "消防車", "content": "images/firetruck.jpg", "category": "交通工具" },
+  { "id": "t15", "word": "警車", "content": "images/policecar.jpg", "category": "交通工具" },
+  { "id": "t16", "word": "卡車", "content": "images/truck.jpg", "category": "交通工具" },
+  { "id": "t17", "word": "曳引車", "content": "images/tractor.jpg", "category": "交通工具" },
+  { "id": "t18", "word": "堆高機", "content": "images/forklift.jpg", "category": "交通工具" },
+  { "id": "t19", "word": "纜車", "content": "images/cablecar.jpg", "category": "交通工具" },
+  { "id": "t20", "word": "遊艇", "content": "images/yacht.jpg", "category": "交通工具" }
+]
