@@ -3,52 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>語言復健圖卡練習 (分離式架構)</title>
+    <title>語言復健圖卡練習 (含隨機模式)</title>
     <style>
-        body {
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        h1 { font-size: 2rem; color: #2c3e50; margin-bottom: 20px; text-align: center; }
-        .card-container {
-            background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            width: 90%; max-width: 450px; padding: 30px; display: flex;
-            flex-direction: column; align-items: center; text-align: center;
-        }
-        .image-box {
-            height: 220px; display: flex; align-items: center;
-            justify-content: center; margin-bottom: 20px; background: #f8fafc;
-            width: 100%; border-radius: 15px; border: 2px dashed #cbd5e1;
-            overflow: hidden; /* 確保圖片不會溢出框框 */
-        }
-        /* 更改為 contain，讓圖片完整呈現、不被裁切 */
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-        }
-        .prompt-text { font-size: 1.3rem; color: #64748b; margin-bottom: 20px; }
-        .answer-box {
-            font-size: 2.2rem; font-weight: bold; color: #1e293b;
-            margin-bottom: 30px; min-height: 50px; display: flex;
-            align-items: center; justify-content: center;
-        }
+        /* ... (保持之前的 CSS 不變) ... */
+        body { font-family: system-ui, sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        .card-container { background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); width: 90%; max-width: 450px; padding: 30px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .image-box { height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: #f8fafc; width: 100%; border-radius: 15px; border: 2px dashed #cbd5e1; overflow: hidden; }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; }
         .btn-group { display: flex; flex-direction: column; gap: 15px; width: 100%; }
-        button {
-            font-size: 1.3rem; padding: 15px 25px; border: none;
-            border-radius: 12px; cursor: pointer; font-weight: bold;
-        }
+        button { font-size: 1.3rem; padding: 15px 25px; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; }
         .btn-show { background-color: #3b82f6; color: white; }
         .btn-speak { background-color: #10b981; color: white; display: none; }
         .btn-next { background-color: #64748b; color: white; }
+        .btn-mode { background-color: #f59e0b; color: white; margin-top: 10px; } /* 模式按鈕 */
         .progress { margin-top: 20px; font-size: 1.1rem; color: #64748b; }
     </style>
 </head>
@@ -58,13 +25,14 @@
 
     <div class="card-container">
         <div class="image-box" id="imageBox">⏳</div>
-        <div class="prompt-text">請問這是什麼？試著說說看：</div>
         <div class="answer-box" id="answerBox">載入中...</div>
 
         <div class="btn-group">
             <button class="btn-show" id="showBtn" onclick="revealAnswer()">看答案 / 聽聲音</button>
             <button class="btn-speak" id="speakBtn" onclick="speakWord()">再聽一次</button>
             <button class="btn-next" onclick="nextCard()">下一張</button>
+            <!-- 模式切換按鈕 -->
+            <button class="btn-mode" id="modeBtn" onclick="toggleMode()">目前模式：順序播放</button>
         </div>
     </div>
 
@@ -73,34 +41,48 @@
     <script>
         let cards = [];
         let currentIndex = 0;
+        let isRandomMode = false; // 記錄是否為隨機模式
 
+        // ... (獲取 DOM 元素的代碼)
         const imageBox = document.getElementById("imageBox");
         const answerBox = document.getElementById("answerBox");
         const showBtn = document.getElementById("showBtn");
         const speakBtn = document.getElementById("speakBtn");
+        const modeBtn = document.getElementById("modeBtn");
         const progressText = document.getElementById("progressText");
 
         async function loadCards() {
             try {
                 const response = await fetch('cards.json');
                 cards = await response.json();
-                if (cards.length > 0) {
-                    updateCard();
-                }
-            } catch (error) {
-                answerBox.textContent = "載入資料失敗";
-                console.error("無法取得圖卡資料:", error);
-            }
+                if (cards.length > 0) updateCard();
+            } catch (error) { console.error(error); }
+        }
+
+        // 切換模式的函式
+        function toggleMode() {
+            isRandomMode = !isRandomMode;
+            modeBtn.textContent = isRandomMode ? "目前模式：隨機播放" : "目前模式：順序播放";
         }
 
         function updateCard() {
             const current = cards[currentIndex];
             imageBox.innerHTML = `<img src="${current.content}" alt="${current.word}">`;
-            
             answerBox.textContent = "？";
             showBtn.style.display = "block";
             speakBtn.style.display = "none";
             progressText.textContent = `第 ${currentIndex + 1} 張 / 共 ${cards.length} 張`;
+        }
+
+        function nextCard() {
+            if (isRandomMode) {
+                // 隨機模式：產生一個 0 到 cards.length-1 的隨機數字
+                currentIndex = Math.floor(Math.random() * cards.length);
+            } else {
+                // 順序模式
+                currentIndex = (currentIndex + 1) % cards.length;
+            }
+            updateCard();
         }
 
         function revealAnswer() {
@@ -122,13 +104,7 @@
             }
         }
 
-        function nextCard() {
-            currentIndex = (currentIndex + 1) % cards.length;
-            updateCard();
-        }
-
         loadCards();
     </script>
-
 </body>
 </html>
