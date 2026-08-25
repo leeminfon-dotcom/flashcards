@@ -108,6 +108,25 @@
   { "id": "f27", "word": "雨傘", "content": "images/umbrella.jpg", "category": "服裝飾品" },
   { "id": "f28", "word": "口罩", "content": "images/mask.jpg", "category": "服裝飾品" },
   { "id": "f29", "word": "睡衣", "content": "images/pajamas.jpg", "category": "服裝飾品" },
-  { "id": "f30", "word": "西裝", "content": "images/suit.jpg", "category": "服裝飾品" }
+  { "id": "f30", "word": "西裝", "content": "images/suit.jpg", "category": "服裝飾品" },
+  { "id": "w1", "word": "游泳", "content": "images/swimming.jpg", "category": "水上運動" },
+  { "id": "w2", "word": "衝浪", "content": "images/surfing.jpg", "category": "水上運動" },
+  { "id": "w3", "word": "直立板", "content": "images/sup.jpg", "category": "水上運動" },
+  { "id": "w4", "word": "獨木舟", "content": "images/canoeing.jpg", "category": "水上運動" },
+  { "id": "w5", "word": "划船", "content": "images/rowing.jpg", "category": "水上運動" },
+  { "id": "w6", "word": "帆船", "content": "images/sailing.jpg", "category": "水上運動" },
+  { "id": "w7", "word": "風帆", "content": "images/windsurfing.jpg", "category": "水上運動" },
+  { "id": "w8", "word": "水上摩托車", "content": "images/jetski.jpg", "category": "水上運動" },
+  { "id": "w9", "word": "快艇", "content": "images/motorboating.jpg", "category": "水上運動" },
+  { "id": "w10", "word": "潛水", "content": "images/diving.jpg", "category": "水上運動" },
+  { "id": "w11", "word": "浮潛", "content": "images/snorkeling.jpg", "category": "水上運動" },
+  { "id": "w12", "word": "水球", "content": "images/waterpolo.jpg", "category": "水上運動" },
+  { "id": "w13", "word": "花式游泳", "content": "images/synchronized_swimming.jpg", "category": "水上運動" },
+  { "id": "w14", "word": "跳水", "content": "images/cliff_diving.jpg", "category": "水上運動" },
+  { "id": "w15", "word": "滑水", "content": "images/waterskiing.jpg", "category": "水上運動" },
+  { "id": "w16", "word": "風箏衝浪", "content": "images/kitesurfing.jpg", "category": "水上運動" },
+  { "id": "w17", "word": "激流泛舟", "content": "images/rafting.jpg", "category": "水上運動" },
+  { "id": "w18", "word": "釣魚", "content": "images/fishing.jpg", "category": "水上運動" },
+  { "id": "w19", "word": "水上鋼鐵人", "content": "images/flyboarding.jpg", "category": "水上運動" },
+  { "id": "w20", "word": "拔河", "content": "images/dragon_boat.jpg", "category": "水上運動" }
 ]
-
